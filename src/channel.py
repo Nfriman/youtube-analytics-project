@@ -21,6 +21,32 @@ class Channel:
         self.video_count = self.info['items'][0]['statistics']['videoCount']
         self.view_count = self.info['items'][0]['statistics']['viewCount']
 
+    def __str__(self):
+        return f"{self.title} ({self.url})"
+
+    def __add__(self, other):
+        return self.subscriber_count + other.subscriber_count
+
+    def __sub__(self, other):
+        return int(self.subscriber_count) - int(other.subscriber_count)
+
+    def __gt__(self, other):
+        return int(self.subscriber_count) > int(other.subscriber_count)
+
+    def __ge__(self, other):
+        return int(self.subscriber_count) >= int(other.subscriber_count)
+
+    def __lt__(self, other):
+        return int(self.subscriber_count) < int(other.subscriber_count)
+
+    def __le__(self, other):
+        return int(self.subscriber_count) <= int(other.subscriber_count)
+
+    def __ne__(self, other):
+        return int(self.subscriber_count) == int(other.subscriber_count)
+
+
+
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
         youtube = build('youtube', 'v3', developerKey=api_key)
@@ -48,3 +74,5 @@ class Channel:
         """возвращающий объект для работы с YouTube API"""
         youtube = build('youtube', 'v3', developerKey=api_key)
         return youtube
+
+
