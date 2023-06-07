@@ -13,7 +13,7 @@ class PlayList:
         self.playlist_id = playlist_id
         self.playlist = youtube.playlists().list(part='snippet', id=self.playlist_id).execute()
         self.title = self.playlist['items'][0]['snippet']['title']
-        self.url = f'https://www.youtube.com/playlist?list=PLguYHBi01DWr4bRWc4uaguASmo7lW4GCb'
+        self.url = f'https://www.youtube.com/playlist?list={playlist_id}'
 
         self.playlist_videos = youtube.playlistItems().list(playlistId=playlist_id, part='contentDetails', maxResults=50).execute()
         self.video_ids: list[str] = [video['contentDetails']['videoId'] for video in self.playlist_videos['items']]
